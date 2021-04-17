@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import style from "./form.module.scss";
+import PropTypes from 'prop-types';
 
+import style from "./form.module.scss";
 function Form({ user, genders, onSave }) {
   const [firstName, setFirstName] = useState(user ? user.first_name : "");
   const [lastName, setLastName] = useState(user ? user.last_name : "");
@@ -27,7 +28,7 @@ function Form({ user, genders, onSave }) {
 
   return (
     <form className={style.formContent} onSubmit={(e) => onSubmit(e)}>
-      <label for="fname">First name:</label>
+      <label htmlFor="fname">First name:</label>
       <br />
       <input
         type="text"
@@ -38,7 +39,7 @@ function Form({ user, genders, onSave }) {
         value={firstName}
       />
       <br />
-      <label for="lname">Last name:</label>
+      <label htmlFor="lname">Last name:</label>
       <br />
       <input
         type="text"
@@ -51,7 +52,7 @@ function Form({ user, genders, onSave }) {
       <br />
       {!user && (
         <>
-          <label for="password">Password:</label>
+          <label htmlFor="password">Password:</label>
           <br />
           <input
             type="password"
@@ -64,7 +65,7 @@ function Form({ user, genders, onSave }) {
           <br />
         </>
       )}
-      <label for="birthday">Birthday:</label>
+      <label htmlFor="birthday">Birthday:</label>
       <br />
       <input
         type="date"
@@ -75,18 +76,18 @@ function Form({ user, genders, onSave }) {
         value={birthday}
       />
       <br />
-      <label for="gender">Gender:</label>
+      <label htmlFor="gender">Gender:</label>
       <br />
       <select
         onChange={(e) => setGenderId(e.target.value)}
         required
         name="gender"
         id="gender"
+        value={genderId}
       >
         {genders.map((gender) => {
-          let selected = genderId === gender.gender_id;
           return (
-            <option key={gender.gender_id} selected value={gender.gender_id}>
+            <option key={gender.gender_id} value={gender.gender_id}>
               {gender.name}
             </option>
           );
@@ -98,8 +99,27 @@ function Form({ user, genders, onSave }) {
   );
 }
 
-Form.propTypes = {};
+Form.propTypes = {
+  onSave: PropTypes.func,
+  user :  PropTypes.shape({
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    password: PropTypes.string,
+    birthday: PropTypes.string,
+    gender_id: PropTypes.number,
+  }),
+  genders: PropTypes.arrayOf(
+    PropTypes.shape({
+      gender_id: PropTypes.number,
+      name: PropTypes.string,
+    }),
+  ),
+};
 
-Form.defaultProps = {};
+Form.defaultProps = {
+  onSave: {},
+  user: null,
+  genders: [],
+};
 
 export default Form;
