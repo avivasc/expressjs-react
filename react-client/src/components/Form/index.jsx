@@ -86,7 +86,7 @@ function Form({ user, genders, onSave }) {
         {genders.map((gender) => {
           let selected = genderId === gender.gender_id;
           return (
-            <option selected value={gender.gender_id}>
+            <option key={gender.gender_id} selected value={gender.gender_id}>
               {gender.name}
             </option>
           );

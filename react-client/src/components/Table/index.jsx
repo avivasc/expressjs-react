@@ -16,7 +16,7 @@ function Table({ users, OnEdit }) {
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr>
+            <tr key={user.user_id} >
               <td>{user.first_name}</td>
               <td>{user.last_name}</td>
               <td>{user.birthdayFormatted}</td>
