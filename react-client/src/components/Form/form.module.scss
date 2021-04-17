@@ -1,0 +1,27 @@
+.formContent {
+  input, select {
+    width: 80%;
+    display: block;
+    width: 100%;
+    border: 1px solid #ebebeb;
+    padding: 11px 20px;
+    box-sizing: border-box;
+    font-weight: 500;
+    font-size: 15px;
+  }
+  label {
+    float: left;
+    padding-bottom: 10px;
+  }
+  button {
+    color: #fff;
+    background-color: #26a69a;
+    text-align: center;
+    letter-spacing: 0.5px;
+    height: 34px;
+    font-size: 16px;
+    padding: 0 28px;
+    cursor: pointer;
+    float: left;
+  }
+}
